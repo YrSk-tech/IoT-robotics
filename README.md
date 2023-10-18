@@ -7,6 +7,9 @@ Conection and reading data from neo-6m-gps to CYCKIT042 PSoC 4 PEONEER KIT by us
 #My Design in Psoc Creator
 ![image](https://github.com/YrSk-tech/IoT-robotics/assets/32609324/3e062de2-e893-434e-9b90-95548b336b5c)
 
+#Pins in Psoc Creator
+![image](https://github.com/YrSk-tech/IoT-robotics/assets/32609324/8a950b0b-7967-4a5b-ba8a-13bca3da7557)
+
 
 
 
