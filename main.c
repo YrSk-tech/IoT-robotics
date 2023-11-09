@@ -18,17 +18,16 @@ int main() {
     UART_Init();
     LCD_Init();
 
-    /* Start SCB (UART mode) operation */
     UART_Start();
     LCD_Start();
     
-    memset(nmea_sentence, '\0', NMEA_MAX_LENGTH); // Clear the buffer
+    memset(nmea_sentence, '\0', NMEA_MAX_LENGTH); 
 
     for (;;) {
-        neo_data = UART_UartGetChar(); // Get received character or zero if nothing has been received yet
+        neo_data = UART_UartGetChar(); 
 
-        if (neo_data != 0) { // Check if any data is received
-            if (neo_data == '$') { // Check for start of NMEA sentence
+        if (neo_data != 0) { 
+            if (neo_data == '$') { 
                 sentence_start = true;
                 nmea_index = 0;
                 fieldIndex = 0;
@@ -48,26 +47,26 @@ int main() {
                     // Parse the NMEA sentence
                     char *token = strtok(nmea_sentence, ",");
 
-                    // Loop through the tokens of the NMEA sentence
+                    
                     while (token != NULL) {
                         fieldIndex++;
-                        if (fieldIndex == 3) { // Latitude field
+                        if (fieldIndex == 4) { 
                             latitude = token;
-                        } else if (fieldIndex == 4) { // NS indicator
+                        } else if (fieldIndex == 5) { 
                             ns_indicator = token;
-                        } else if (fieldIndex == 5) { // Longitude field
+                        } else if (fieldIndex == 6) { 
                             longitude = token;
-                        } else if (fieldIndex == 6) { // EW indicator
+                        } else if (fieldIndex == 7) { 
                             ew_indicator = token;
                             // We have both latitude and longitude, can display them
                             if (latitude && longitude && ns_indicator && ew_indicator) {
                                 LCD_ClearDisplay();
                                 LCD_Position(0, 0);
-                                LCD_PrintString("Lat: ");
+                                LCD_PrintString("Lat:");
                                 LCD_PrintString(latitude);
                                 LCD_PrintString(ns_indicator);
                                 LCD_Position(1, 0);
-                                LCD_PrintString("Lon: ");
+                                LCD_PrintString("Lon:");
                                 LCD_PrintString(longitude);
                                 LCD_PrintString(ew_indicator);
                                 CyDelay(500);
